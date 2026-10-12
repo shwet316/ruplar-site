@@ -1,0 +1,250 @@
+<title>Ruplar</title>
+<style>
+  /* Editorial coming-soon: full-bleed teal hero, story column, feature mosaic, waitlist. */
+  :root{
+    --teal:#1D9E75; --teal-700:#15694F; --teal-900:#0E2A24; --teal-100:#CFEEE1; --teal-50:#E7F5EF;
+    --gold:#C9A227;
+    --paper:#FBFCFB; --raised:#FFFFFF; --ink:#13201C; --muted:#5C6B65; --line:#E2EAE6;
+    --hero-ink:#F3FBF7; --hero-sub:#B8D8CC;
+    --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#0C1210; --raised:#141D19; --ink:#E9F1ED; --muted:#8FA099; --line:#24302B;
+    --teal-50:#14221C; --teal-100:#1B352B; color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --paper:#0C1210; --raised:#141D19; --ink:#E9F1ED; --muted:#8FA099; --line:#24302B;
+    --teal-50:#14221C; --teal-100:#1B352B; color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  @media (prefers-reduced-motion:no-preference){
+    .rise{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+    .rise:nth-child(2){animation-delay:.06s}.rise:nth-child(3){animation-delay:.12s}.rise:nth-child(4){animation-delay:.18s}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  }
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* HERO */
+  .hero{position:relative;background:
+      radial-gradient(120% 90% at 85% -10%, #1D9E75 0%, #11503C 42%, #0E2A24 100%);
+    color:var(--hero-ink);padding-inline:20px;padding-block:clamp(44px,9vw,96px) clamp(56px,10vw,112px);overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background:radial-gradient(60% 50% at 15% 110%, rgba(201,162,39,.22), transparent 70%)}
+  .hero-inner{max-width:58rem;margin:0 auto;position:relative}
+  .brandrow{display:flex;align-items:center;gap:12px}
+  .brandrow svg{height:34px;width:auto}
+  .brandrow .nm{font-family:var(--sans);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;color:#fff}
+  .badge{margin-left:auto;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+    color:var(--hero-sub);border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:999px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.7rem,7.5vw,5rem);line-height:1.02;letter-spacing:-.02em;
+    margin:clamp(40px,8vw,72px) 0 0;max-width:16ch;text-wrap:balance}
+  .hero p.sub{font-size:clamp(1.05rem,2.5vw,1.35rem);color:var(--hero-sub);max-width:42ch;margin:22px 0 0;font-weight:420}
+  .hero .meaning{font-size:.92rem;color:var(--hero-sub);margin:14px 0 0;letter-spacing:.01em}
+  .hero .meaning b{color:#fff;font-weight:600}
+
+  /* WAITLIST */
+  .waitlist{margin-top:clamp(30px,5vw,44px);max-width:30rem}
+  form.signup{display:flex;gap:10px;flex-wrap:wrap}
+  form.signup input{flex:1;min-width:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);
+    color:#fff;font-family:var(--sans);font-size:1rem;padding:14px 16px;border-radius:12px}
+  form.signup input::placeholder{color:rgba(243,251,247,.6)}
+  form.signup input:focus{outline:2px solid var(--gold);outline-offset:1px;background:rgba(255,255,255,.16)}
+  form.signup button{background:#fff;color:var(--teal-900);font-family:var(--sans);font-weight:700;font-size:1rem;
+    border:0;padding:14px 22px;border-radius:12px;cursor:pointer;white-space:nowrap;transition:transform .12s}
+  form.signup button:hover{transform:translateY(-1px)}
+  .hint{font-size:.8rem;color:var(--hero-sub);margin:12px 0 0}
+  .done{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
+    border-radius:14px;padding:18px 20px;font-size:1.02rem;color:#fff}
+  .done .tick{flex:none;width:26px;height:26px;border-radius:50%;background:#fff;color:var(--teal-700);
+    display:flex;align-items:center;justify-content:center;font-weight:800}
+
+  /* SECTIONS */
+  .wrap{max-width:58rem;margin:0 auto;padding-inline:20px}
+  .story{padding-block:clamp(56px,10vw,104px)}
+  .kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 18px}
+  .story h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,4.6vw,2.7rem);letter-spacing:-.015em;
+    line-height:1.08;margin:0 0 24px;max-width:20ch;text-wrap:balance}
+  .story p{font-size:clamp(1.05rem,2.2vw,1.2rem);color:var(--ink);max-width:60ch;margin:0 0 18px}
+  .story p.q{font-family:var(--serif);font-weight:500;font-style:italic;color:var(--teal-700);font-size:clamp(1.3rem,3.2vw,1.7rem);
+    line-height:1.3;border-left:3px solid var(--teal);padding-left:20px;margin:30px 0}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .story p.q{color:var(--teal-100)}}
+  :root[data-theme="dark"] .story p.q{color:var(--teal-100)}
+
+  /* VISION */
+  .vision{background:var(--teal-50);padding-block:clamp(56px,10vw,100px)}
+  .vision h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,4.6vw,2.6rem);letter-spacing:-.015em;
+    margin:0 0 10px;max-width:18ch;text-wrap:balance}
+  .vision .lead{color:var(--muted);font-size:1.1rem;max-width:50ch;margin:0 0 36px}
+  .mosaic{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .tile{background:var(--raised);border:1px solid var(--line);border-radius:16px;padding:24px;min-width:0;
+    display:flex;flex-direction:column;gap:8px}
+  .tile.big{grid-column:span 3}.tile.sm{grid-column:span 2}.tile.wide{grid-column:span 6}
+  @media(max-width:760px){.mosaic{grid-template-columns:1fr}.tile.big,.tile.sm,.tile.wide{grid-column:span 1}}
+  .tile .ic{width:38px;height:38px;border-radius:10px;background:var(--teal-50);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+  .tile h3{font-family:var(--serif);font-weight:600;font-size:1.25rem;margin:0;letter-spacing:-.01em}
+  .tile p{margin:0;color:var(--muted);font-size:.95rem}
+  .tile.feature{background:linear-gradient(135deg,#1D9E75,#11503C);border:0;color:#fff}
+  .tile.feature h3{color:#fff}.tile.feature p{color:#D7ECE3}
+  .tile.feature .ic{background:rgba(255,255,255,.16);color:#fff}
+  .tile.feature .soon{margin-top:6px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#FBE7A6}
+
+  /* CLOSER */
+  .closer{padding-block:clamp(56px,10vw,104px);text-align:center}
+  .closer h2{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,5.5vw,3.2rem);letter-spacing:-.02em;
+    margin:0 auto 10px;max-width:16ch;text-wrap:balance}
+  .closer p{color:var(--muted);font-size:1.1rem;margin:0 auto 30px;max-width:40ch}
+  .closer .waitlist{margin-inline:auto}
+  .closer form.signup input{background:var(--teal-50);border-color:var(--line);color:var(--ink)}
+  .closer form.signup input::placeholder{color:var(--muted)}
+  .closer form.signup button{background:var(--teal);color:#fff}
+  .closer .hint{color:var(--muted)}
+  .closer .done{background:var(--teal-50);border-color:var(--teal-100);color:var(--ink)}
+  .closer .done .tick{background:var(--teal);color:#fff}
+
+  footer{border-top:1px solid var(--line);padding-block:40px}
+  footer .wrap{display:flex;gap:18px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+  footer .fnm{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:700;letter-spacing:-.02em}
+  footer .fnm svg{height:24px}
+  footer small{color:var(--muted);font-size:.82rem}
+  footer .meaning{color:var(--muted);font-size:.82rem}
+  footer .meaning b{color:var(--ink);font-weight:600}
+</style>
+
+<!--
+  RUPLAR — coming-soon page (LIVE-READY).
+  Waitlist wired to Kit (form ID 10032916): submissions POST to Kit, the page shows
+  its own success state. IMPORTANT: the form only truly captures on the HOSTED site
+  (Cloudflare Pages / Netlify). A sandboxed preview can't reach Kit, so there the
+  submit will show a "didn't go through" message — that's expected, not a bug.
+  After hosting, test with a real email and confirm it appears in Kit > Subscribers.
+-->
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="brandrow rise">
+      <svg viewBox="0 0 48 64" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-label="Ruplar"><line x1="24" y1="6" x2="24" y2="58"/><line x1="13" y1="17" x2="35" y2="17"/><line x1="13" y1="27" x2="35" y2="27"/><path d="M33 37 C33 32 28 31 23 31 C18 31 15 34 15 37.5 C15 41 19 42 23.5 42.5 C28 43 32 44 32 48 C32 52 27 53 22 53 C17 53 14.5 51 14.5 47.5"/></svg>
+      <span class="nm">Ruplar</span>
+      <span class="badge">Coming soon</span>
+    </div>
+
+    <h1 class="rise">Earn early. Pay attention sooner.</h1>
+    <p class="sub rise">One app to see what you make, where it goes, and how to grow it — built by someone who learned the hard way.</p>
+    <p class="meaning rise"><b>Rupee&#8202;+&#8202;Dollar.</b> The name bridges where we come from and where we're building.</p>
+
+    <div class="waitlist rise">
+      <form class="signup" id="form-top" novalidate>
+        <input type="email" id="email-top" name="email_address" autocomplete="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="hint" id="hint-top">Be among the first in. No spam — one email when we open.</p>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="wrap">
+    <p class="kicker">Why Ruplar</p>
+    <h2>I started earning early. I just never started paying attention.</h2>
+    <p>By the time I was 28, I'd been earning for years — and had far less saved than I should have. Not because I didn't make enough. Because I never kept a real eye on what came in versus what went out.</p>
+    <p class="q">The problem was never the money. It was never looking at it.</p>
+    <p>Being financially responsible turned out to be one habit: a regular, honest look at your own numbers. Ruplar exists to make that look effortless — so you start paying attention years before it almost gets away from you.</p>
+  </div>
+</section>
+
+<section class="vision">
+  <div class="wrap">
+    <h2>Your whole money life, in one place.</h2>
+    <p class="lead">Most people juggle an app for budgeting, another for splitting with friends, a spreadsheet for debt, and nothing that ties it together. Ruplar is the one app that does.</p>
+    <div class="mosaic">
+      <div class="tile big">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3>See everything, automatically</h3>
+        <p>Link your bank, and spending sorts itself into categories. No more wondering where the month went.</p>
+      </div>
+      <div class="tile sm">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Ask anything</h3>
+        <p>An AI that reads your real numbers. “Can I afford this?” — answered.</p>
+      </div>
+      <div class="tile sm">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
+        <h3>Never miss a bill</h3>
+        <p>Bills, renewals, and sneaky subscriptions — caught before they hit.</p>
+      </div>
+      <div class="tile big">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
+        <h3>Grow what's left</h3>
+        <p>Net worth, investments, and a smarter way to pay down debt — plus your Ruplar Score, one honest number for your financial health.</p>
+      </div>
+      <div class="tile feature wide">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M4 20c0-3 2.5-5 5-5s5 2 5 5"/><path d="M15.5 20c.2-2 1.4-3.3 3-3.3s2.8 1 3 3"/></svg></div>
+        <h3>Money with friends, finally sorted</h3>
+        <p>Split a trip, a dinner, the rent — Ruplar tracks who owes who and settles it clean. And we're reimagining the worst part: being the one who chases friends to get paid back. More on that soon.</p>
+        <span class="soon">The part no one else has fixed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <h2>Be first through the door.</h2>
+    <p>Ruplar opens soon. Join the waitlist and we'll email you the moment it's live.</p>
+    <div class="waitlist">
+      <form class="signup" id="form-bottom" novalidate>
+        <input type="email" id="email-bottom" name="email_address" autocomplete="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="hint" id="hint-bottom">One email. When we open. That's it.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fnm">
+      <svg viewBox="0 0 48 64" fill="none" stroke="var(--teal)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-label="Ruplar"><line x1="24" y1="6" x2="24" y2="58"/><line x1="13" y1="17" x2="35" y2="17"/><line x1="13" y1="27" x2="35" y2="27"/><path d="M33 37 C33 32 28 31 23 31 C18 31 15 34 15 37.5 C15 41 19 42 23.5 42.5 C28 43 32 44 32 48 C32 52 27 53 22 53 C17 53 14.5 51 14.5 47.5"/></svg>
+      Ruplar
+    </div>
+    <span class="meaning"><b>Rupee + Dollar</b> · ruplar.com</span>
+    <small>© 2026 Ruplar. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+  var KIT_FORM="10032916";
+  function wire(formId, hintId){
+    var form=document.getElementById(formId), hint=document.getElementById(hintId);
+    if(!form) return;
+    form.addEventListener("submit",function(e){
+      e.preventDefault();
+      var input=form.querySelector("input[type=email]");
+      var val=(input.value||"").trim();
+      if(!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){
+        input.focus(); if(hint){hint.textContent="Enter a valid email and we'll add you."} return;
+      }
+      var btn=form.querySelector("button"), orig=btn.textContent;
+      btn.disabled=true; btn.textContent="Joining…";
+      var data=new FormData(); data.append("email_address", val);
+      fetch("https://app.kit.com/forms/"+KIT_FORM+"/subscriptions",{
+        method:"POST", headers:{"Accept":"application/json"}, body:data
+      }).then(function(r){return r.json().catch(function(){return{};});})
+        .then(function(){ success(); })
+        .catch(function(){
+          btn.disabled=false; btn.textContent=orig;
+          if(hint){hint.textContent="That didn’t go through — check your connection and try again.";}
+        });
+      function success(){
+        var done=document.createElement("div");
+        done.className="done";
+        done.innerHTML='<span class="tick">✓</span><span>You’re on the list. We’ll email you the moment Ruplar opens.</span>';
+        form.replaceWith(done);
+        if(hint) hint.remove();
+      }
+    });
+  }
+  wire("form-top","hint-top");
+  wire("form-bottom","hint-bottom");
+</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Hanken+Grotesk:wght@420;500;600;700&display=swap">
